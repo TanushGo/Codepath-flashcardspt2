@@ -123,3 +123,11 @@ button:focus-visible {
   color: white;
   transform: rotateX(180deg);
 }
+
+.correct{
+  background-color: green;
+}
+
+.wrong{
+  background-color: red;
+}

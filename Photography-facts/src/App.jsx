@@ -18,7 +18,7 @@ function App() {
   const [flipped, setFlipped] = useState(false);
 
   const [correctAns, setCorrectAnswer] = useState('')
-  
+  const [ans, setAnswer] = useState('')
   const updateCardForward = (e) => {
     e.preventDefault();
     if (card==9){
@@ -31,6 +31,8 @@ function App() {
     {
       setFlipped(!flipped);
     }
+    setCorrectAnswer('');
+    setAnswer('');
   }
   const updateFlipped = (e) => {
     e.preventDefault();
@@ -48,6 +50,22 @@ function App() {
     {
       setFlipped(!flipped);
     }
+    setCorrectAnswer('');
+    setAnswer('');
+  }
+
+  const onCheckAnswer = (e) =>
+  {
+    e.preventDefault();
+    if (!flipped && ans!=""){
+      if(ans==facts[card]["ans"])
+      {
+        setCorrectAnswer("correct");
+      }
+      else{
+        setCorrectAnswer("wrong");
+      }
+    }
   }
   const classFlipped = flipped ? 'flip-card flip' : 'flip-card';
   
@@ -63,13 +81,21 @@ function App() {
     
     <form >
     
-    // we will fill this in soon!
+    <input
+      type="text"
+      name="Guess"
+      value={ans}
+      placeholder="Guess the answer..."
+      onChange={(e)=>setAnswer(e.target.value)}
+      className = {correctAns}
+      />
     
     </form>
 
     <button type="submit" className="button submit" onClick={onCheckAnswer}>
     Check Answer
     </button>
+
     <button onClick={updateCardBackward}> Back </button>
     <button onClick={updateCardForward}> Next </button>
     
